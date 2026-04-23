@@ -1,81 +1,130 @@
 /* static/style.css */
 :root {
-    --primary-color: #4361ee;
-    --secondary-color: #3f37c9;
-    --bg-color: #f8f9fa;
-    --text-color: #2b2d42;
-    --card-bg: #ffffff;
-    --error-color: #ef233c;
-    --success-color: #38b000;
+    --main-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Dégradé violet/bleu doux */
+    --glass-bg: rgba(255, 255, 255, 0.15); /* Fond blanc très transparent */
+    --glass-border: rgba(255, 255, 255, 0.2); /* Bordure subtile */
+    --text-color: #ffffff;
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --primary-accent: #00f2fe; /* Cyan brillant pour les accents */
+    --secondary-accent: #4facfe;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    font-family: 'Poppins', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--main-bg);
     color: var(--text-color);
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    backdrop-filter: blur(10px); /* Flou d'arrière-plan global */
 }
 
-.container {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
+/* Carte principale avec effet de verre */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px); /* L'effet dépoli fort */
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    padding: 3rem 2rem;
+    width: 90%;
+    max-width: 420px;
     text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
 }
 
-h2, h1 {
+h1, h2, h3 {
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+h2 { font-size: 2rem; }
+h3 { font-size: 1.2rem; opacity: 0.9; font-weight: 400;}
+
+p {
     margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    opacity: 0.8;
+    font-size: 0.95rem;
 }
 
+/* Inputs transparents et stylisés */
 input {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
+    padding: 15px 20px;
+    margin: 12px 0;
+    background: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-color);
     font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+/* Boutons modernes avec dégradé */
 button {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+    padding: 16px;
+    margin-top: 15px;
     border: none;
-    border-radius: 8px;
-    background-color: var(--primary-color);
-    color: white;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--secondary-accent) 0%, var(--primary-accent) 100%);
+    color: #fff;
     font-size: 1rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-    background-color: var(--secondary-color);
+    box-shadow: 0 5px 20px rgba(0, 242, 254, 0.4);
 }
 
+button:active {
+    transform: scale(0.98); /* Effet de pression */
+}
+
+/* Le bouton secondaire (Déconnexion) */
 button.secondary {
-    background-color: #6c757d;
-    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    margin-top: 30px;
+}
+button.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
 }
 
-.camera-container {
-    margin: 20px auto;
-    width: 320px;
-    height: 240px;
-    border-radius: 12px;
+/* Conteneur caméra épuré */
+.camera-box {
+    margin: 25px auto;
+    width: 300px;
+    height: 225px; /* Ratio 4:3 un peu plus petit */
+    border-radius: 16px;
     overflow: hidden;
-    border: 3px solid var(--primary-color);
+    border: 2px solid var(--glass-border);
     background: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     position: relative;
 }
 
@@ -85,30 +134,47 @@ button.secondary {
     object-fit: cover;
 }
 
-.divider {
-    margin: 25px 0;
+/* Séparateur élégant */
+.separator {
+    margin: 30px 0;
     display: flex;
     align-items: center;
-    text-align: center;
-    color: #888;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.divider::before, .divider::after {
+.separator::before, .separator::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--glass-border);
 }
 
-.divider span {
-    padding: 0 10px;
-    font-size: 0.9rem;
+.separator span {
+    padding: 0 15px;
 }
 
-.info-box {
-    background: #e7f3fe;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
+/* Liens */
+a {
+    color: var(--primary-accent);
+    text-decoration: none;
     font-size: 0.9rem;
-    border-left: 5px solid var(--primary-color);
+    transition: opacity 0.3s;
+}
+a:hover {
+    opacity: 0.8;
+}
+
+/* Boîte d'info (Dashboard) */
+.status-badge {
+    background: rgba(56, 176, 0, 0.15); /* Vert transparent */
+    color: #89ff00;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(137, 255, 0, 0.3);
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
