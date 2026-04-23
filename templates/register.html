@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inscription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Inscription</h2>
+    <form id="regForm" action="/register" method="POST">
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Mot de passe" required><br>
+        
+        <div style="margin: 20px 0;">
+            <video id="video" width="320" height="240" autoplay></video>
+            <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+            <input type="hidden" name="face_image" id="face_image">
+        </div>
+
+        <button type="button" onclick="capture()">Prendre photo & S'inscrire</button>
+    </form>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const faceInput = document.getElementById('face_image');
+
+        // Accès à la webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => { video.srcObject = stream; });
+
+        function capture() {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, 320, 240);
+            // Convertit l'image en base64
+            const dataURL = canvas.toDataURL('image/jpeg');
+            faceInput.value = dataURL;
+            
+            // Soumet le formulaire après capture
+            document.getElementById('regForm').submit();
+        }
+    </script>
+</body>
+</html>

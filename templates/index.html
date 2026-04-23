@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Bienvenue sur votre espace sécurisé</h1>
+    <p>Vous êtes connecté en tant que : <strong>{{ user }}</strong></p>
+    
+    <div style="background: #e7f3fe; padding: 20px; border-radius: 5px;">
+        <h3>Données de session</h3>
+        <p>Statut : Authentifié via DynamoDB</p>
+    </div>
+
+    <br>
+    <a href="/logout"><button>Se déconnecter</button></a>
+</body>
+</html>
